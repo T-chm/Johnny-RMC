@@ -29,8 +29,8 @@ board.on("ready", function() {
 
 });
 
-// make web server listen on port 80
-app.listen(80);
+// make web server listen on port 8000
+app.listen(8000);
 
 
 // handle web server
