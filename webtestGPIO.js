@@ -7,7 +7,7 @@ var app = require('http').createServer(handler)
   , led, sensor;
 
 gpio.setup(7, gpio.DIR_OUT, write);
-gpio.setup(8, gpio.DIR_OUT, write1);)
+gpio.setup(11, gpio.DIR_OUT, write1);
 
 function write() {
     gpio.write(7, false, function(err) {
@@ -18,9 +18,9 @@ function write() {
 
 
 function write1() {
-	gpio.write(8, false, function(err) {
+	gpio.write(11, false, function(err) {
 		if (err) throw err;
-		console.log('Written to pin 8');
+		console.log('Written to pin 11');
 	});
 }
 
@@ -57,7 +57,7 @@ io.sockets.on('connection', function (socket) {
   });
 
 
-         socket.on('relay1', function(data) {
+    socket.on('relay1', function(data) {
                 if (data.status) {
                 
     gpio.write(7, true, function(err) {
@@ -75,10 +75,30 @@ io.sockets.on('connection', function (socket) {
     });
 
                 }                    
+        
+     });
 
 
-            
-        });
+    socket.on('relay2', function(data) {
+                if (data.status) {
 
+    gpio.write(11, true, function(err) {
+        if (err) throw err;
+	console.log('Written to pin 11');
+    });
+
+                }
+
+                if (!data.status) {
+                
+    gpio.write(11, false, function(err) {
+        if (err) throw err;
+
+        console.log('Written to pin 11');
+    });
+
+                }                    
+        
+     });
 
 });

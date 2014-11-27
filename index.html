@@ -24,22 +24,6 @@
 
 <body>
     <div class="container">
-        <h1>LED Blink Rate Control</h1>
-        <div class="row">
-            <div class="col-md-12">
-                <h4>LED Pulse Delay (ms)</h4>
-                <p>
-                    <input type="text" class="form-control" id="ledDelay" name="ledDelay" value="1000" />
-                </p>
-                <p>
-                    <button id="ledSet" class="btn btn-success">Set Delay</button>
-                </p>
-                <br>
-                <div class="row">
-                    <h1>Switch State Monitoring</h1>
-                    <br>
-                    <h4 id="inData"><h4>
-  	</div>
 
 
     <div class = "row">
@@ -60,25 +44,21 @@
       </div>
       </div>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-                <script src="jquery-1.11.1.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script>
 
 
-        var socket = io.connect('http://localhost:9000');
+        var socket = io.connect('http://192.168.2.2:9000');
 
         socket.on('news', function (data) {
         
   	         console.log(data);
   	     });
-
-  socket.on('pin', function (data) {
       
-  	$("#inData").text(data);
        
-        });
 
         //$('.servobtn').button();
 
@@ -87,36 +67,35 @@
         //    socket.emit('servo',{pos:$('input[name=servo]:checked').val()});
        // });
 
-        $('#ledSet').on('click',function(){
-          var tmp = parseInt($('#ledDelay').val(),10);
-          console.log("Setting LED Delay:",tmp)
-          socket.emit('led',{delay:tmp});
-        });
           
           $('#Relay1On').on('click',function(){
               var status1On = 1;
               socket.emit('relay1',{status:status1On});
-          });
+        	console.log("ON Button Clicked");  
+	});
           
           
-          $('#Relay2On').on('click',function(){
-              var status2On=1;
-              socket.emit('relay2',{status:status2On});
-          });
           
-
-
           $('#Relay1Off').on('click',function(){
               var status1Off = 0;
               socket.emit('relay1',{status:status1Off});
-          });
+              console.log("OFF Button Clicked");  
+	});
           
-          
-          $('#Relay2Off').on('click',function(){
-              var status2Off=0;
-              socket.emit('relay2',{status:status2Off});
-          });
+ 
+          $('#Relay2On').on('click',function(){
+              var status1On = 1;
+         
+              socket.emit('relay2',{status:status1On});
+        	console.log("ON Button Clicked");  
+	});
 
-      </script>
+          $('#Relay2Off').on('click',function(){
+              var status1Off = 0; 
+              socket.emit('relay2',{status:status1Off});
+              console.log("OFF Button Clicked");   
+	});
+          
+</script>
       </body>
   </html>
