@@ -1,4 +1,5 @@
-// initialize everything, web server, socket.io, filesystem, johnny-five
+//need to execute this file using sudo in order to access the GPIO pins
+// initialize everything, web server, socket.io, filesystem, rpi-gpio
 var app = require('http').createServer(handler)
   , io = require('socket.io').listen(app)
   , fs = require('fs')
@@ -6,15 +7,24 @@ var app = require('http').createServer(handler)
   , led, sensor;
 
 gpio.setup(7, gpio.DIR_OUT, write);
+gpio.setup(8, gpio.DIR_OUT, write1);)
 
 function write() {
     gpio.write(7, false, function(err) {
         if (err) throw err;
-        console.log('Written to pin');
+        console.log('Written to pin 7');
     });
 }
 
-// make web server listen on port 8000
+
+function write1() {
+	gpio.write(8, false, function(err) {
+		if (err) throw err;
+		console.log('Written to pin 8');
+	});
+}
+
+// make web server listen on port 9000
 app.listen(9000);
 
 
