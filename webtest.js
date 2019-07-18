@@ -1,10 +1,9 @@
-    // initialize everything, web server, socket.io, filesystem, johnny-five
-    var connect = require('connect'),
-        app = require('http').createServer(handler),
-        io = require('socket.io').listen(app),
-        fs = require('fs'),
-        five = require("johnny-five"),
-        board, servo, led, sensor, relay1, relay2;
+// initialize everything, web server, socket.io, filesystem, johnny-five
+	var app = require('http').createServer(handler),
+	io = require('socket.io').listen(app),
+	fs = require('fs'),
+	five = require("johnny-five"),
+	board, servo, led, sensor, relay1, relay2;
 
 
     var count = 0;
@@ -15,7 +14,8 @@
     board.on("ready", function() {
 
         // init a led on pin 13, strobe every 1000ms
-        led = new five.Led(13).strobe(1000);
+		led = new five.Led(13)
+		//led.blink(1000);
 
         // var button = new five.Button(5);
 
@@ -39,7 +39,7 @@
     });
 
     // make web server listen on port 9000
-    app.listen(9000);
+    app.listen(8080);
 
     // handle web server
 
@@ -74,7 +74,7 @@
 
         if (board.isReady) {
             // read in sensor data, pass to browser
-            console.log("Bello");
+            console.log("Hello");
 
 
             // var pin = new five.Pin(7);
@@ -126,11 +126,14 @@
             //	console.log(data);
             if (board.isReady) {
 
-                if (data.status) {
-                    relay2.on();
+                if (data.status === 1) {
+                    console.log(data.status);
+                    led.blink(500);
                 }
-                if (!data.status) {
-                    relay2.off();
+                if (data.status === 0) {
+                    console.log(data.status);
+                    led.stop();
+                    led.off();
                 }
 
             }

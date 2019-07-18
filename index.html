@@ -27,18 +27,17 @@
 
 
     <div class = "row">
-    <h1>Relay Control</h1>
-    </div>
-
-    <div class="row">
-              <p><button id="Relay1On" class="btn btn-warning">Set Relay 1 On</button></p>
-  	          <p><button id="Relay1Off" class="btn btn-warning">Set Relay 1 Off</button></p>
+        <div class="text-center">    
+            <h1>ARDUINO LED TEST</h1>
+        </div>
     </div>
 
 
     <div class="row">
-              <p><button id="Relay2On" class="btn btn-info">Set Relay 2 On</button></p>
-              <p><button id="Relay2Off" class="btn btn-info">Set Relay 2 Off</button></p>
+        <div class="text-center">
+              <p><button id="Relay2On" class="btn btn-info">LED Strobe On</button></p>
+              <p><button id="Relay2Off" class="btn btn-warning">LED Strobe Off</button></p>
+        </div>
     </div>
 
       </div>
@@ -51,7 +50,7 @@
       <script>
 
 
-        var socket = io.connect('http://192.168.2.2:9000');
+        var socket = io.connect('http://127.0.0.1:8080');
 
         socket.on('news', function (data) {
         

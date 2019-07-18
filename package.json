@@ -4,8 +4,8 @@
   "description": "Testing node, web sockets, johnny-five, arduino",
   "main": "webtest.js",
   "dependencies": {
-    "socket.io": "~0.9.16",
-    "johnny-five": "~0.7.28"
+    "johnny-five": "^1.2.0",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {},
   "scripts": {
